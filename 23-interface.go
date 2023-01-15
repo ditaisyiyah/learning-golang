@@ -5,13 +5,13 @@ import (
 )
 
 /*
-interface is a contract
-interface is kind of data type
-mostly its fields are a func or method (void or nonvoid)
+An interface type is defined as a set of method signatures.
+A value of interface type CAN hold any value THAT implements THOSE methods.
+Interface is abstract, not allowed to create an instance of the interface.
 */
 
 type (
-	Voice interface {
+	Intro interface {
 		GetVoice() string
 		GetName() string
 	}
@@ -26,9 +26,9 @@ type (
 	}
 )
 
-// sayHello use Voice interface as a contract
-func sayHello(voice Voice) {
-	fmt.Println("Hello,", voice.GetVoice())
+// sayHello use Intro interface as a contract
+func sayHello(intro Intro) {
+	fmt.Println("Hello,", intro.GetVoice())
 }
 
 func (a Animal) GetVoice() string {
@@ -39,8 +39,8 @@ func (a Animal) GetName() string {
 	return a.Name
 }
 
-func greeting(voice Voice) {
-	fmt.Println(voice.GetVoice(), voice.GetName())
+func greeting(intro Intro) {
+	fmt.Println(intro.GetVoice(), intro.GetName())
 }
 
 func (h Human) GetVoice() string {
@@ -58,6 +58,10 @@ func main() {
 		Feet:  4,
 	}
 
+	catVoice := cat.GetVoice()
+	catName := cat.GetName()
+	fmt.Println(catVoice, catName)
+
 	// any struct that want to invoke a func that has a contract with interface
 	// that struct must have all the prerequisite that interface has
 	sayHello(cat)
@@ -68,5 +72,9 @@ func main() {
 	}
 
 	greeting(person)
+
+	var myInterface Intro
+	result := myInterface.GetName()
+	fmt.Println(result, "just want you to know, this could be donw")
 
 }

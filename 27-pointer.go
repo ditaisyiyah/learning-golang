@@ -41,7 +41,8 @@ func main() {
 	// novel2 := &novel // short declaration
 	var novel2 *Book = &novel
 	// novel2 points toward novel
-	// novel2 is a "pointer", novel is "address of" novel2
+	// novel2 is a "pointer"
+	// novel2 stores "address of" novel
 
 	novel2.Pages = 300
 
@@ -58,16 +59,23 @@ func main() {
 	fmt.Println("novel2 reassigned :", novel2)
 	fmt.Println("novel :", novel) // novel do not change
 
-	// 4. pointing all the struct that point to address of novel2
+	// 4. pointing all the structs that point to address of novel
 	// to this new (address of) struct
 	fmt.Println("==== pointing to new struct")
 	var novel3 *Book = &novel
 	var novel4 *Book = &novel
+	// var novel4 *Book = novel3
 
+	// (*) acts like an operator,
+	// to access/change the ori value w/out accessing the ori variable
 	*novel3 = Book{
 		Type:  "Magazine",
 		Pages: 20,
 	}
+	// novel = Book{
+	// 	Type:  "Magazine",
+	// 	Pages: 20,
+	// }
 
 	fmt.Println("novel3:", novel3)
 	fmt.Println("novel4 :", novel4)
@@ -77,7 +85,19 @@ func main() {
 	myString := "dita"
 	var pointerMyString *string = &myString
 
-	fmt.Println(pointerMyString, &pointerMyString, *pointerMyString)
-	fmt.Println(&*pointerMyString, *&pointerMyString)
+	// value of pointerMyString, stores address of myString
+	fmt.Println(pointerMyString) // 0xc000054290
+
+	// address of pointerMyString
+	fmt.Println(&pointerMyString) // 0xc000006030
+
+	// referred value of pointerMyString
+	fmt.Println(*pointerMyString) // dita
+
+	// address of (referred value of pointerMyString)
+	fmt.Println(&*pointerMyString) // 0xc000054290
+
+	// value of (address of pointerMyString)
+	fmt.Println(*&pointerMyString) // 0xc000054290
 
 }

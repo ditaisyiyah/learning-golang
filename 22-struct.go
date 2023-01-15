@@ -5,10 +5,8 @@ import (
 )
 
 /*
-struct is a data type of multiple fields,
-could have uneven data type
-
-as if an object in other languages
+A struct is a collection of fields, could have uneven data type
+Struct as if an object in other languages, could do instantiation (creating an instance)
 */
 
 type People struct {
